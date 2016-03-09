@@ -19,6 +19,7 @@ fs.readFile(fileName, function(err, src) {
   
   // Запускаем код приложения в песочнице
   var script = vm.createScript(src, fileName);
+
   script.runInNewContext(sandbox);
   
   // Забираем ссылку из sandbox.module.exports, можем ее исполнить,

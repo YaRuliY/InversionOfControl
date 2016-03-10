@@ -6,5 +6,12 @@ console.log('From application global context');
 
 module.exports = function() {
     console.log('From application exported function');
-    console.log(this.module.toString());
+
+    var time = function(time){
+        setTimeout(function(){
+            console.log('in interval');
+        },time*1000);
+    }
+
+    time(1);
 };

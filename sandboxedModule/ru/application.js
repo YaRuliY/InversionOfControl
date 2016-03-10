@@ -11,7 +11,7 @@ module.exports = function() {
         setTimeout(function(){
             console.log('in interval');
         },time*1000);
-    }
+    };
 
     time(1);
 };

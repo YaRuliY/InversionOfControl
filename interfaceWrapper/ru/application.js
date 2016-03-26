@@ -1,24 +1,26 @@
-console.log('From application global context');
+//console.log('From application global context');
 
 var fileName = './README.md';
-console.log('Application going to read ' + fileName);
+
+//console.log('Application going to read ' + fileName);
 fs.readFile(fileName, function(err, src) {
-  console.log('File ' + fileName + ' size ' + src.length);
+  console.log('+++File ' + fileName + '; size ->' +
+      src.length + ' in App');
 });
 
 var logger = fs.createWriteStream( './file.log', {flags: 'r+'} );
-logger.write('text');
+logger.write('some text');
+console.log('+++Data was written in the logFile');
 
-/*var reader = fs.createReadStream('./file.log');*/
-
+console.log('\nBefore TimeOut\n');
 setTimeout(function(){
-  console.log('out in app');
+  console.log('+++Set TimeOut in App');
   var reader = fs.createReadStream('./file.log');
   var data = '';
-  reader.on('data', function(param) {
-    data += param;
+  reader.on('data', function(text) {
+    data += text;
   });
   reader.on('end', function() {
-    console.log('logfile: ' + data);
+    console.log('+++Text in the logfile: ' + data);
   });
 }, 1000);

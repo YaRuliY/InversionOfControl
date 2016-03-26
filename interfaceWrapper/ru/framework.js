@@ -1,9 +1,6 @@
-// Пример оборачивания функции в песочнице
-
 var fs = require('fs'),
     vm = require('vm');
 
-// Объявляем хеш из которого сделаем контекст-песочницу
 var context = {
   module: {},
   console: console,
@@ -49,11 +46,11 @@ function wrapFunction(fnName, fn) {
     Array.prototype.push.apply(args, arguments);
     if (typeof(args[args.length - 1]) === 'function'){
       var func = args[args.length - 1];
-      args[args.length - 1] = wrapFunction(args[args.length - 1].name, args[args.length - 1]);
+      args[args.length - 1] =
+          wrapFunction(args[args.length - 1].name, args[args.length - 1]);
       console.log('arguments - >' + args);
     }
     console.log('Call: ' + fnName);
-    //console.dir(args);
     return fn.apply(undefined, args);
   }
 }
